@@ -37,7 +37,7 @@ public class ChestInteraction : MonoBehaviour
         {
             if (door != null)
             {
-                Debug.Log(door.name + " is now open!");
+                Debug.Log(" The Doors are now open!");
             }
         }
     }
