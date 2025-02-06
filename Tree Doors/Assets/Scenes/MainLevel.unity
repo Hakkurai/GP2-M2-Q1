@@ -4515,6 +4515,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpForce: 7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheck: {fileID: 1680324899}
 --- !u!136 &1652456294
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4852,7 +4857,7 @@ GameObject:
   - component: {fileID: 1680324898}
   - component: {fileID: 1680324897}
   - component: {fileID: 1680324896}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
