@@ -26,7 +26,7 @@ public class DoorInteraction4 : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Player is entering Main Level...");
+            Debug.Log("YOU WIN!");
             SceneManager.LoadScene("MainLevel"); // Load Main Level
         }
     }

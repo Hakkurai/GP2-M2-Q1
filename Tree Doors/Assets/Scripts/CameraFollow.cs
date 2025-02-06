@@ -2,23 +2,38 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;               // The player (capsule) transform
-    public Vector3 offset = new Vector3(0, 2, -5); // Offset position from the target
-    public float smoothSpeed = 0.125f;     // Smoothness of the camera movement
+    public Transform target;                // The player transform
+    public Vector3 offset = new Vector3(0, 2, -5); // Camera offset
+    public float smoothSpeed = 0.125f;      // Smoothness of movement
+    public float rotationSpeed = 3f;        // Speed of rotation
+
+    private float yaw = 0f;  // Horizontal rotation angle
+    private float pitch = 0f; // Vertical rotation angle
 
     void LateUpdate()
     {
         if (target == null) return;
 
-        // Calculate the desired camera position
-        Vector3 desiredPosition = target.position + target.TransformDirection(offset);
+        // Handle camera rotation when RMB is held
+        if (Input.GetMouseButton(1))
+        {
+            float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
+            float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed;
 
-        // Smoothly interpolate to the desired position
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+            yaw += mouseX;
+            pitch -= mouseY;
+            pitch = Mathf.Clamp(pitch, -30f, 60f);
+        }
 
-        // Rotate the camera to always look at the target
-        transform.LookAt(target);
+        // Apply rotation to the camera
+        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
+        Vector3 rotatedOffset = rotation * offset;
+
+        // Set camera position
+        transform.position = Vector3.Lerp(transform.position, target.position + rotatedOffset, smoothSpeed);
+        transform.LookAt(target.position);
+
+        // Rotate the player to match the camera direction (only horizontally)
+        target.rotation = Quaternion.Euler(0f, yaw, 0f);
     }
 }
-
