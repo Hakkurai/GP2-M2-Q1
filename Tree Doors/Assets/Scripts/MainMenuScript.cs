@@ -33,16 +33,15 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void QuitGame()
+    public void MainMenu()
     {
-        PlayButtonClickSound(); // Play sound when clicking "Quit"
-        Debug.Log("QUIT!");
-#if UNITY_EDITOR
-        Application.Quit();
-#else
-        System.Diagnostics.Process.GetCurrentProcess().Kill();
-#endif
+        PlayButtonClickSound(); // Play sound when clicking "Return to Main Menu"
+        SceneManager.LoadScene("MainMenu"); // Change "MainMenu" to your actual main menu scene name
     }
 
-
+    public void ReplayGame()
+    {
+        PlayButtonClickSound(); // Play sound when clicking "Replay"
+        SceneManager.LoadScene("MainLevel"); // Change "MainLevel" to the actual main level name
+    }
 }
