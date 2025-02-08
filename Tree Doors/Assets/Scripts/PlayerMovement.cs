@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer; // Layer for the ground
     public Transform groundCheck; // Empty GameObject at the bottom of the capsule
     public Transform cameraTransform; // Reference to the camera
+    public AudioSource jumpSound; // Reference to AudioSource
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -55,6 +56,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+            if (jumpSound != null)
+            {
+                jumpSound.Play(); // Play jump sound
+            }
         }
     }
 }
